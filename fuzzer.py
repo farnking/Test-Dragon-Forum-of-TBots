@@ -160,9 +160,28 @@ class fuzzer:
                 )  # "It is better to direct {0} page to the main page with an alert!",
                 ri = self.API.issueMan.addIssueReport(**ir)
 
-    def randomword(self, length):
+    def randomword(self, value):
         letters = string.ascii_lowercase
-        return "".join(random.choice(letters) for i in range(length))
+        length = random.randint(1, 50)
+        return value + "".join(random.choice(letters) for i in range(length))
+
+    def randomparameter(self, value):
+        letters = string.ascii_lowercase
+        value += "&"
+        value += "".join(random.choice(letters) for i in range(random.randint(1, 50)))
+        value += "="
+        value += "".join(random.choice(letters) for i in range(random.randint(1, 50)))
+        value += "#"
+        value += "".join(random.choice(letters) for i in range(random.randint(1, 50)))
+        return value
+
+    def upperValue(self, value):
+        mutated_value = value.upper()
+        return mutated_value
+
+    def lowerValue(self, value):
+        mutated_value = value.upper()
+        return mutated_value
 
     def fuzzForm(self, ffs):
         if len(ffs) <= 0:
@@ -170,8 +189,15 @@ class fuzzer:
         sbi, ffv = random.choice(list(ffs.items()))
         ffkeys = ffv.keys()
         for ffi in ffkeys:
-            strLen = random.randint(1, 50)
-            ffv[ffi] = str(ffv[ffi]) + self.randomword(strLen)
+            mutated_choice = random.randint(1, 7)
+            mutated_str = str(ffv[ffi])
+            if mutated_choice & 1:
+                mutated_str = self.randomword(mutated_str)
+            if mutated_choice & 2:
+                mutated_str = self.upperValue(mutated_str)
+            if mutated_choice & 4:
+                mutated_str = self.lowerValue(mutated_str)
+            ffv[ffi] = mutated_str
         return sbi, ffv
 
     def fuzzGets(self, gs):
@@ -179,21 +205,30 @@ class fuzzer:
             return None, None
         g = random.choice(gs)
         r = g.replace("?", "?" * random.randint(2, 50))
-        r += "&"
-        r += self.randomword(random.randint(1, 50))
-        r += "="
-        r += self.randomword(random.randint(1, 50))
-        r += "#"
-        r += self.randomword(random.randint(1, 50))
-        return r
+        mutated_choice = random.randint(1, 7)
+        mutated_str = str(r)
+        if mutated_choice & 1:
+            mutated_str = self.randomparameter(mutated_str)
+        if mutated_choice & 2:
+            mutated_str = self.upperValue(mutated_str)
+        if mutated_choice & 4:
+            mutated_str = self.lowerValue(mutated_str)
+        return mutated_str
 
     def fuzzLinks(self, lnks):
         if len(lnks) <= 0:
             return None, None
         lnk = random.choice(lnks)
         r = lnk.replace("/", "/" * random.randint(2, 50))
-        r += "/"
-        r += self.randomword(random.randint(1, 50))
+        mutated_choice = random.randint(1, 7)
+        mutated_str = str(r)
+        if mutated_choice & 1:
+            mutated_str += "/"
+            mutated_str = self.randomword(mutated_str)
+        if mutated_choice & 2:
+            mutated_str = self.upperValue(mutated_str)
+        if mutated_choice & 4:
+            mutated_str = self.lowerValue(mutated_str)
         return r
 
 
