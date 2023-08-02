@@ -68,9 +68,9 @@ class fuzzer:
     # The method is expected to return a test action suggestion, usually as an action index (with test data), 
     # or as a special string for test command.   
     def getTestInput(self): 
-        if self.countStep > 5:
+        if self.countStep > 3:
             return "exitAlgorithm", "enough!"
-        # self.countStep += 1 
+        self.countStep += 1 
         # Call test oracle to generate issue report if necessary. 
         self.oracle()  
 
@@ -152,10 +152,11 @@ class fuzzer:
     def fuzzForm(self, ffs): 
         if len(ffs) <= 0: 
             return None, None  
-        sbi, ffv = random.choice(ffs.items())
+        sbi, ffv = random.choice( list(ffs.items()) )
         ffkeys = ffv.keys() 
         for ffi in ffkeys: 
-            ffv[ffi] = ffv[ffi] + 'XXXXXXXXXXXXXXXXXXXXXX'
+            if type(ffi) is int:  
+                ffv[ffi] = str(ffv[ffi]) + 'XXXXXXXXXXXXXXXXXXXXXX'
         return sbi, ffv
     
     def fuzzGets(self, gs): 
