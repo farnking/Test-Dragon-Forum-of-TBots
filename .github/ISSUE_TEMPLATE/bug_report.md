@@ -54,3 +54,12 @@ Such dumping may contain debugging output.
 
 **Additional context**
 Add any other context about the problem here.
+
+**Your diagnosis**
+If any?  That could be very valuable. 
+
+**Your suggestions for fixing the problem**
+If any?  That could be most valuable. 
+
+**References**
+Any links for related documents
