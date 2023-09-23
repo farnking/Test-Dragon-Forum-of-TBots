@@ -13,6 +13,16 @@ A clear and concise description of what the bug is.
 **Project ID** 
 For your management
 
+**Name of App under Test**
+Example www.test-dragon.com (of web app), com.kkk.ppp.good (of Android app or iOS app)
+
+**Type of App under Test**
+Web app?  Android app? iOS app?
+
+**URL**
+Mandatory for web app under test
+
+
 **To Reproduce**
 Steps to reproduce the behavior:
 1. Go to '...'
