@@ -4,7 +4,7 @@
 * If you have a suggestion, please leave a comment! [>>discussion page](https://github.com/farnking/Test-Dragon-Forum-of-TBots/discussions) 
 * If you ran into some trouble using Test-Dragon, please post an issue! [>>issue page](https://github.com/farnking/Test-Dragon-Forum-of-TBots/issues)
 
-
+# Online Documentation of Test-Dragon TBots [>>documentation pages](https://www.test-dragon.com/TestDragon/helpTestDragon)
 
 # Control flow between Test-Dragon and TBots. 
 
