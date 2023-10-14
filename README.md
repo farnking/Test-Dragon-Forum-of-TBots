@@ -8,6 +8,7 @@
 
 # Control flow between Test-Dragon and TBots. 
 
+![testDragonFlow](https://github.com/farnking/Test-Dragon-Forum-of-TBots/assets/23325423/dd33717a-8733-4cef-abd9-8a9927ab8390)
 
 
 In the following, you find some example tBots.  
